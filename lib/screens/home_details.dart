@@ -3,6 +3,7 @@ import 'package:ecoin/widgets/customContainer.dart';
 import 'package:ecoin/widgets/dash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_candlesticks/flutter_candlesticks.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 import '../constants.dart';
 
 class HomeDetails extends StatelessWidget {
@@ -418,7 +419,56 @@ class HomeDetails extends StatelessWidget {
                 ),
                 textAlign: TextAlign.left,
               ),
-              Container(color: Colors.red, height: 120),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 120,
+                      child: Sparkline(
+                        lineColor: Colors.red,
+                        data: [
+                          0.0,
+                          1.0,
+                          1.5,
+                          2.0,
+                          0.0,
+                          0.0,
+                          -0.5,
+                          -1.0,
+                          -0.5,
+                          0.0,
+                          0.0
+                        ],
+                        fillMode: FillMode.below,
+                        fillColor: Colors.red,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 120,
+                      child: Sparkline(
+                        lineColor: Colors.green,
+                        data: [
+                          0.0,
+                          1.0,
+                          1.5,
+                          0.0,
+                          -0.5,
+                          -1.0,
+                          -0.5,
+                          0.0,
+                          2.0,
+                          0.0,
+                          0.0
+                        ],
+                        fillMode: FillMode.below,
+                        fillColor: Colors.green,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 20),
               CustomContainer(
                 padding: EdgeInsets.all(10),
