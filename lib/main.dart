@@ -65,28 +65,36 @@ class _NavigationBarState extends State<NavigationBar> {
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(''),
+            icon: _selectedIndex == 0
+                ? Image.asset('assets/images/folio_golden.png')
+                : Image.asset('assets/images/folio_white.png'),
+            title: Text('Folio'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.timeline),
-            title: Text(''),
-          ),
+              icon: _selectedIndex == 1
+                  ? Image.asset('assets/images/market_golden.png')
+                  : Image.asset('assets/images/market_white.png'),
+              title: Text("Market")),
           BottomNavigationBarItem(
-            icon: Icon(Icons.money_off),
-            title: Text(''),
-          ),
+              icon: _selectedIndex == 2
+                  ? new Image.asset('assets/images/orders_golden.png')
+                  : new Image.asset('assets/images/orders_white.png'),
+              title: Text("Orders")),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            title: Text(''),
-          ),
+              icon: _selectedIndex == 3
+                  ? new Image.asset('assets/images/chat_golden.png')
+                  : new Image.asset('assets/images/chat_white.png'),
+              title: Text("Chat")),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text(''),
-          ),
+              icon: _selectedIndex == 4
+                  ? new Image.asset('assets/images/settings_golden.png')
+                  : new Image.asset('assets/images/settings_white.png'),
+              title: Text("Settings")),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xffFFC400),

@@ -64,10 +64,8 @@ class Setting extends StatelessWidget {
                                 onTap: () =>
                                     Navigator.pushNamed(context, Deposit.route),
                                 title: 'Deposit',
-                                icon: Icon(
-                                  Icons.attach_money,
-                                  color: Colors.white,
-                                ),
+                                icon: Image.asset(
+                                    'assets/images/settingIcons/icon_deposit.png'),
                               ),
                               OptionTile(
                                 onTap: () => Navigator.pushNamed(
@@ -82,10 +80,8 @@ class Setting extends StatelessWidget {
                                 onTap: () =>
                                     Navigator.pushNamed(context, Send.route),
                                 title: 'Send',
-                                icon: Icon(
-                                  Icons.send,
-                                  color: Colors.white,
-                                ),
+                                icon: Image.asset(
+                                    'assets/images/settingIcons/icon_send.png'),
                               ),
                             ],
                           ),
@@ -94,10 +90,8 @@ class Setting extends StatelessWidget {
                       Positioned(
                         right: 0,
                         child: IconButton(
-                          icon: Icon(
-                            Icons.mode_edit,
-                            color: const Color(0xffDADADA),
-                          ),
+                          icon: Image.asset(
+                              'assets/images/settingIcons/icon_edit.png'),
                           onPressed: null,
                         ),
                       )
