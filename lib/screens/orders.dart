@@ -4,6 +4,9 @@ import 'package:ecoin/widgets/dash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ecoin/constants.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
+
+const _data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
 
 class Orders extends StatelessWidget {
   @override
@@ -333,9 +336,18 @@ class ActiveMarketListTile extends StatelessWidget {
           /// Graph
           Container(
             height: 50,
-            color: Colors.red,
-            child: Dash(
-              length: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                Center(
+                  child: Dash(
+                    length: MediaQuery.of(context).size.width,
+                  ),
+                ),
+                Sparkline(
+                  data: _data,
+                  lineColor: Colors.green,
+                )
+              ],
             ),
           ),
           SizedBox(height: 10),
@@ -493,9 +505,18 @@ class PendingMarketListTile extends StatelessWidget {
           /// Graph
           Container(
             height: 50,
-            color: Colors.red,
-            child: Dash(
-              length: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                Center(
+                  child: Dash(
+                    length: MediaQuery.of(context).size.width,
+                  ),
+                ),
+                Sparkline(
+                  data: _data,
+                  lineColor: Colors.red,
+                )
+              ],
             ),
           ),
           SizedBox(height: 10),

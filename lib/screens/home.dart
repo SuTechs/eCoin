@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecoin/constants.dart';
 import 'package:flutter_candlesticks/flutter_candlesticks.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 
 class Home extends StatelessWidget {
   final List sampleData = [
@@ -281,6 +282,20 @@ class Home extends StatelessWidget {
 }
 
 class CryptoListTile extends StatelessWidget {
+  static const _data = [
+    0.0,
+    1.0,
+    1.5,
+    2.0,
+    0.0,
+    0.0,
+    -0.5,
+    -1.0,
+    -0.5,
+    0.0,
+    0.0
+  ];
+
   final String name;
   final double val1, val2;
   const CryptoListTile({
@@ -311,13 +326,27 @@ class CryptoListTile extends StatelessWidget {
                 letterSpacing: 0.5,
               ),
             ),
+            SizedBox(width: 10),
             Expanded(
-              child: Center(
-                child: Dash(
-                  length: 100,
-                ),
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: 30,
+                    child: Dash(
+                      length: MediaQuery.of(context).size.width,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                    child: Sparkline(
+                      data: _data,
+                      lineColor: Colors.green,
+                    ),
+                  )
+                ],
               ),
             ),
+            SizedBox(width: 10),
             Text.rich(
               TextSpan(
                 text: '₮$val1\n',

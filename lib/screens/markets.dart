@@ -2,6 +2,7 @@ import 'package:ecoin/widgets/customContainer.dart';
 import 'package:ecoin/widgets/dash.dart';
 import 'package:flutter/material.dart';
 import 'package:ecoin/constants.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 
 class Market extends StatefulWidget {
   @override
@@ -223,6 +224,20 @@ class _MarketState extends State<Market> {
 
 /// Grid Tile
 class MarketCryptoGridListTile extends StatelessWidget {
+  static const _data = [
+    0.0,
+    1.0,
+    1.5,
+    2.0,
+    0.0,
+    0.0,
+    -0.5,
+    -1.0,
+    -0.5,
+    0.0,
+    0.0
+  ];
+
   final String name;
   final double val1, val2;
   const MarketCryptoGridListTile({
@@ -272,13 +287,27 @@ class MarketCryptoGridListTile extends StatelessWidget {
             SizedBox(height: 10),
             Row(
               children: [
+                SizedBox(width: 10),
                 Expanded(
-                  child: Center(
-                    child: Dash(
-                      length: 50,
-                    ),
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                        child: Dash(
+                          length: MediaQuery.of(context).size.width,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: Sparkline(
+                          data: _data,
+                          lineColor: Colors.green,
+                        ),
+                      )
+                    ],
                   ),
                 ),
+                SizedBox(width: 10),
                 Text.rich(
                   TextSpan(
                     text: '$val1\n',
@@ -313,6 +342,20 @@ class MarketCryptoGridListTile extends StatelessWidget {
 
 /// List Tile
 class MarketCryptoListTile extends StatelessWidget {
+  static const _data = [
+    0.0,
+    1.0,
+    1.5,
+    2.0,
+    0.0,
+    0.0,
+    -0.5,
+    -1.0,
+    -0.5,
+    0.0,
+    0.0
+  ];
+
   final String name;
   final double val1, val2;
   const MarketCryptoListTile({
@@ -350,13 +393,27 @@ class MarketCryptoListTile extends StatelessWidget {
                 letterSpacing: 0.5,
               ),
             ),
+            SizedBox(width: 10),
             Expanded(
-              child: Center(
-                child: Dash(
-                  length: 100,
-                ),
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: 30,
+                    child: Dash(
+                      length: MediaQuery.of(context).size.width,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                    child: Sparkline(
+                      data: _data,
+                      lineColor: Colors.green,
+                    ),
+                  )
+                ],
               ),
             ),
+            SizedBox(width: 10),
             Text.rich(
               TextSpan(
                 text: '₮val1\n',
