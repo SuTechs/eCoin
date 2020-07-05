@@ -1,6 +1,7 @@
 import 'package:ecoin/constants.dart';
 import 'package:ecoin/screens/chat.dart';
 import 'package:ecoin/screens/home.dart';
+import 'package:ecoin/screens/home_details.dart';
 import 'package:ecoin/screens/login.dart';
 import 'package:ecoin/screens/markets.dart';
 import 'package:ecoin/screens/orders.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           Withdraw.route: (context) => Withdraw(),
           Wallet.route: (context) => Wallet(),
           Login.route: (context) => Login(),
+          HomeDetails.route: (context) => HomeDetails(),
         });
   }
 }
@@ -63,6 +65,7 @@ class _NavigationBarState extends State<NavigationBar> {
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
