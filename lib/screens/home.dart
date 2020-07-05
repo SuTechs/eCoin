@@ -205,7 +205,10 @@ class Home extends StatelessWidget {
                               letterSpacing: 0.075,
                               fontWeight: FontWeight.bold),
                         ),
-                        leading: CircleAvatar(),
+                        leading: CircleAvatar(
+                          backgroundColor: const Color(0x00000000),
+                          child: Image.asset('assets/images/fund.png'),
+                        ),
                         trailing: CircleAvatar(
                           radius: 15,
                           backgroundColor: const Color(0xffFFC400),

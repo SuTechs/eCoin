@@ -265,6 +265,8 @@ class CryptoToUSDT extends StatelessWidget {
                 ),
                 SizedBox(width: 8),
                 CircleAvatar(
+                  child: Image.asset('assets/images/settingIcons/convert.png'),
+                  backgroundColor: const Color(0x00000000),
                   radius: 15,
                   // backgroundColor: const Color(0x00000000),
                 ),
@@ -425,6 +427,10 @@ class PendingMarketListTile extends StatelessWidget {
                       ),
                       SizedBox(width: 8),
                       CircleAvatar(
+                        child: Image.asset(
+                            'assets/images/settingIcons/convert.png'),
+                        backgroundColor: const Color(0x00000000),
+
                         radius: 15,
                         // backgroundColor: const Color(0x00000000),
                       ),
