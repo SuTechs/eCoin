@@ -98,7 +98,7 @@ class OrderDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Withdraw'),
+        title: Text('Increase the amount'),
       ),
       body: Padding(
         padding: kAllPagePadding,
