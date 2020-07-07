@@ -23,9 +23,18 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Folio',
-                  style: kHeadingTextStyle,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Folio',
+                      style: kHeadingTextStyle,
+                    ),
+                    Icon(
+                      Icons.menu,
+                      color: Colors.white,
+                    )
+                  ],
                 ),
                 Text.rich(
                   TextSpan(
