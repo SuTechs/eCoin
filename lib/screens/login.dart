@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Email',
+                      isLoginWithEmail ? 'Email' : 'Phone',
                       style: kLoginWhiteTextStyle,
                     ),
                     GestureDetector(
@@ -103,18 +103,22 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 10),
 
                 /// Register
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'No account yet? ',
-                      style: kLoginWhiteTextStyle,
-                    ),
-                    Text(
-                      'Register',
-                      style: kLoginYellowTextStyle,
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () => Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => SignUp())),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'No account yet? ',
+                        style: kLoginWhiteTextStyle,
+                      ),
+                      Text(
+                        'Register',
+                        style: kLoginYellowTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -125,10 +129,149 @@ class _LoginState extends State<Login> {
   }
 }
 
+class SignUp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: kAllPagePadding,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    Icons.clear,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  onTap: () =>
+                      Navigator.pop(context), // onCancel Button Presses
+                ),
+                SizedBox(height: 30),
+                Text(
+                  'Register Now!',
+                  style: kHeadingTextStyle,
+                ),
+                SizedBox(height: 40),
+
+                /// Full Name
+                Text(
+                  'Full Name',
+                  style: kLoginWhiteTextStyle,
+                ),
+                SizedBox(height: 5),
+                EmailField(
+                  textInputType: TextInputType.text,
+                  onEmailChanged: (name) => print('Email = $name'),
+                ),
+                SizedBox(height: 30),
+
+                /// Username
+                Text(
+                  'Username',
+                  style: kLoginWhiteTextStyle,
+                ),
+                SizedBox(height: 5),
+                EmailField(
+                  textInputType: TextInputType.text,
+                  onEmailChanged: (username) => print('Email = $username'),
+                ),
+                SizedBox(height: 30),
+
+                /// Email
+                Text(
+                  'Email',
+                  style: kLoginWhiteTextStyle,
+                ),
+                SizedBox(height: 5),
+                EmailField(
+                  onEmailChanged: (email) => print('Email = $email'),
+                ),
+                SizedBox(height: 30),
+
+                /// Phone Field
+                Text(
+                  'Phone',
+                  style: kLoginWhiteTextStyle,
+                ),
+                SizedBox(height: 5),
+                PhoneField(
+                  onPhoneNumberChanged: (number) =>
+                      print('Phone Number = $number'),
+                ),
+                SizedBox(height: 30),
+
+                /// Password Field
+                PasswordField(
+                  isLogin: false,
+                  onPasswordChanged: (password) =>
+                      print('Password = $password'),
+                ),
+
+                SizedBox(height: 60),
+
+                /// SignUp Button
+                Container(
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: Colors.white,
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Colors.black,
+                        wordSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 10),
+
+                /// Login
+                GestureDetector(
+                  onTap: () => Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => Login())),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have an account? ',
+                        style: kLoginWhiteTextStyle,
+                      ),
+                      Text(
+                        'Login',
+                        style: kLoginYellowTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// components
+
 class EmailField extends StatelessWidget {
   final void Function(String) onEmailChanged;
+  final TextInputType textInputType;
 
-  const EmailField({Key key, @required this.onEmailChanged}) : super(key: key);
+  const EmailField(
+      {Key key,
+      @required this.onEmailChanged,
+      this.textInputType = TextInputType.emailAddress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +284,7 @@ class EmailField extends StatelessWidget {
       ),
       child: TextField(
         onChanged: onEmailChanged,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: textInputType,
         decoration: InputDecoration(border: InputBorder.none),
         style: TextStyle(color: Colors.white),
       ),
@@ -235,8 +378,10 @@ class PhoneField extends StatelessWidget {
 
 class PasswordField extends StatelessWidget {
   final void Function(String) onPasswordChanged;
+  final bool isLogin;
 
-  const PasswordField({Key key, @required this.onPasswordChanged})
+  const PasswordField(
+      {Key key, @required this.onPasswordChanged, this.isLogin = true})
       : super(key: key);
 
   @override
@@ -265,14 +410,17 @@ class PasswordField extends StatelessWidget {
           ),
         ),
         SizedBox(height: 5),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              'Forgot Password?',
-              style: kLoginYellowTextStyle,
-            ),
-          ],
+        Visibility(
+          visible: isLogin,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Forgot Password?',
+                style: kLoginYellowTextStyle,
+              ),
+            ],
+          ),
         ),
       ],
     );

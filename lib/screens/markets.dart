@@ -1,3 +1,4 @@
+import 'package:ecoin/screens/home_details.dart';
 import 'package:ecoin/widgets/customContainer.dart';
 import 'package:ecoin/widgets/dash.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +116,8 @@ class _MarketState extends State<Market> {
                 child: isGrid
                     ? GridView.count(
                         crossAxisCount: 2,
-                        childAspectRatio: 1.7,
+                        childAspectRatio:
+                            (MediaQuery.of(context).size.width * 0.7) / 200,
                         children: [
                           MarketCryptoGridListTile(
                             name: 'BTC',
@@ -251,89 +253,95 @@ class MarketCryptoGridListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isNegative = val2 < 0;
 
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: CustomContainer(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
+    return Container(
+      height: 200,
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, HomeDetails.route),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: CustomContainer(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                CircleAvatar(
-                  radius: 15,
-                ),
-                SizedBox(width: 5),
-                Text(
-                  name,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(
-                      Icons.star,
-                      color: const Color(0xff3A3C40),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 15,
                     ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                SizedBox(width: 10),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      SizedBox(
-                        height: 30,
-                        child: Dash(
-                          length: MediaQuery.of(context).size.width,
+                    SizedBox(width: 5),
+                    Text(
+                      name,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.star,
+                          color: const Color(0xff3A3C40),
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                        child: Sparkline(
-                          data: _data,
-                          lineColor: Colors.green,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text.rich(
-                  TextSpan(
-                    text: '$val1\n',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      letterSpacing: 0.5,
-                      fontWeight: FontWeight.bold,
                     ),
-                    children: [
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            height: 30,
+                            child: Dash(
+                              length: MediaQuery.of(context).size.width,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                            child: Sparkline(
+                              data: _data,
+                              lineColor: Colors.green,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text.rich(
                       TextSpan(
-                        text: '${isNegative ? '-' : '+'}$val2%',
+                        text: '$val1\n',
                         style: TextStyle(
-                          fontSize: 10,
-                          color: isNegative
-                              ? const Color(0xffFF1744)
-                              : const Color(0xff00E676),
+                          fontSize: 15,
+                          color: Colors.white,
+                          letterSpacing: 0.5,
+                          fontWeight: FontWeight.bold,
                         ),
+                        children: [
+                          TextSpan(
+                            text: '${isNegative ? '-' : '+'}$val2%',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: isNegative
+                                  ? const Color(0xffFF1744)
+                                  : const Color(0xff00E676),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  textAlign: TextAlign.right,
+                      textAlign: TextAlign.right,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -369,75 +377,78 @@ class MarketCryptoListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isNegative = val2 < 0;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: CustomContainer(
-        padding: EdgeInsets.all(10),
-        child: Row(
-          children: [
-            Icon(
-              Icons.star,
-              color: const Color(0xff3A3C40),
-            ),
-            SizedBox(width: 5),
-            CircleAvatar(
-              radius: 15,
-            ),
-            SizedBox(width: 10),
-            Text(
-              name,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, HomeDetails.route),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: CustomContainer(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: [
+              Icon(
+                Icons.star,
+                color: const Color(0xff3A3C40),
               ),
-            ),
-            SizedBox(width: 10),
-            Expanded(
-              child: Stack(
-                children: [
-                  SizedBox(
-                    height: 30,
-                    child: Dash(
-                      length: MediaQuery.of(context).size.width,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: Sparkline(
-                      data: _data,
-                      lineColor: Colors.green,
-                    ),
-                  )
-                ],
+              SizedBox(width: 5),
+              CircleAvatar(
+                radius: 15,
               ),
-            ),
-            SizedBox(width: 10),
-            Text.rich(
-              TextSpan(
-                text: '₮val1\n',
+              SizedBox(width: 10),
+              Text(
+                name,
                 style: TextStyle(
-                  fontSize: 15,
                   color: Colors.white,
-                  letterSpacing: 0.5,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
                 ),
-                children: [
-                  TextSpan(
-                    text: '${isNegative ? '-' : '+'}$val2%',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: isNegative
-                          ? const Color(0xffFF1744)
-                          : const Color(0xff00E676),
-                    ),
-                  ),
-                ],
               ),
-              textAlign: TextAlign.right,
-            ),
-          ],
+              SizedBox(width: 10),
+              Expanded(
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                      child: Dash(
+                        length: MediaQuery.of(context).size.width,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: Sparkline(
+                        data: _data,
+                        lineColor: Colors.green,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(width: 10),
+              Text.rich(
+                TextSpan(
+                  text: '₮val1\n',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '${isNegative ? '-' : '+'}$val2%',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: isNegative
+                            ? const Color(0xffFF1744)
+                            : const Color(0xff00E676),
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.right,
+              ),
+            ],
+          ),
         ),
       ),
     );

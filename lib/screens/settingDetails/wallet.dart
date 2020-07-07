@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecoin/constants.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 
 class Wallet extends StatelessWidget {
   static const route = 'Wallet';
@@ -101,9 +102,55 @@ class Wallet extends StatelessWidget {
               ),
 
               /// Graph
-              Container(
-                height: 150,
-                color: Colors.red,
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 120,
+                      child: Sparkline(
+                        lineColor: Colors.red,
+                        data: [
+                          0.0,
+                          1.0,
+                          1.5,
+                          2.0,
+                          0.0,
+                          0.0,
+                          -0.5,
+                          -1.0,
+                          -0.5,
+                          0.0,
+                          0.0
+                        ],
+                        fillMode: FillMode.below,
+                        fillColor: Colors.red,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 120,
+                      child: Sparkline(
+                        lineColor: Colors.green,
+                        data: [
+                          0.0,
+                          1.0,
+                          1.5,
+                          0.0,
+                          -0.5,
+                          -1.0,
+                          -0.5,
+                          0.0,
+                          2.0,
+                          0.0,
+                          0.0
+                        ],
+                        fillMode: FillMode.below,
+                        fillColor: Colors.green,
+                      ),
+                    ),
+                  ),
+                ],
               ),
 
               SizedBox(height: 20),

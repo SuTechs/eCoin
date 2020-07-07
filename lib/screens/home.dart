@@ -1,20 +1,18 @@
 import 'package:ecoin/screens/home_details.dart';
+import 'package:ecoin/widgets/candlechart.dart';
 import 'package:ecoin/widgets/customContainer.dart';
 import 'package:ecoin/widgets/dash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecoin/constants.dart';
-import 'package:flutter_candlesticks/flutter_candlesticks.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 
-class Home extends StatelessWidget {
-  final List sampleData = [
-    {"open": 50.0, "high": 100.0, "low": 40.0, "close": 80, "volumeto": 5000.0},
-    {"open": 80.0, "high": 90.0, "low": 55.0, "close": 65, "volumeto": 4000.0},
-    {"open": 65.0, "high": 120.0, "low": 60.0, "close": 90, "volumeto": 7000.0},
-    {"open": 90.0, "high": 95.0, "low": 85.0, "close": 80, "volumeto": 2000.0},
-    {"open": 80.0, "high": 85.0, "low": 40.0, "close": 50, "volumeto": 3000.0},
-  ];
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,143 +64,7 @@ class Home extends StatelessWidget {
                 ),
 
                 /// Graph
-                CustomContainer(
-                  padding: EdgeInsets.only(bottom: 10, right: 10, left: 10),
-                  child: Column(
-                    children: [
-                      /// Chart Changer
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          DropdownButton<String>(
-                            value: 'Candle Chart',
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: const Color(0xffDADADA),
-                            ),
-                            style: TextStyle(
-                              color: const Color(0xffDADADA),
-                              letterSpacing: 0.075,
-                              fontSize: 11,
-                            ),
-                            underline: Container(
-                              height: 0,
-                            ),
-                            onChanged: (String newValue) {},
-                            items: <String>['Candle Chart']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                          Text.rich(
-                            TextSpan(
-                              text: '₮9,272.8 ',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 11,
-                                color: Colors.white,
-                                letterSpacing: 0.0055,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: ' +3.49%',
-                                  style: TextStyle(
-                                    color: const Color(0xff00e676),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Container(
-                        //color: Colors.red,
-                        height: 330,
-                        child: OHLCVGraph(
-                            data: sampleData,
-                            enableGridLines: true,
-                            volumeProp: 0,
-                            gridLineAmount: 5,
-                            gridLineColor: Colors.grey[300],
-                            gridLineLabelColor: Colors.grey),
-                      ),
-
-                      SizedBox(height: 20),
-
-                      /// Chart Buttons
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 33.4,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xffffffff),
-                            ),
-                            child: Center(child: Text('1D')),
-                          ),
-                          Container(
-                            width: 33.4,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xffFFC400),
-                            ),
-                            child: Center(
-                                child: Text(
-                              '5D',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                          ),
-                          Container(
-                            width: 33.4,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xffffffff),
-                            ),
-                            child: Center(child: Text('1M')),
-                          ),
-                          Container(
-                            width: 33.4,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xffffffff),
-                            ),
-                            child: Center(child: Text('1Y')),
-                          ),
-                          Container(
-                            width: 33.4,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xffffffff),
-                            ),
-                            child: Center(child: Text('5Y')),
-                          ),
-                          Container(
-                            width: 33.4,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xffffffff),
-                            ),
-                            child: Center(child: Text('Max')),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                CandleChart(),
 
                 SizedBox(height: 20),
 
