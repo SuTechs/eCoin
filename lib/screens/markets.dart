@@ -114,55 +114,75 @@ class _MarketState extends State<Market> {
               /// CryptoCoin List
               Expanded(
                 child: isGrid
-                    ? GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio:
-                            (MediaQuery.of(context).size.width * 0.7) / 200,
+                    ? ListView(
                         children: [
-                          MarketCryptoGridListTile(
-                            name: 'BTC',
-                            val1: 9293.74,
-                            val2: 0.24,
+                          CustomGridView(
+                            child1: MarketCryptoGridListTile(
+                              name: 'BTC',
+                              val1: 9293.74,
+                              val2: 0.24,
+                            ),
+                            child2: MarketCryptoGridListTile(
+                              name: 'ETH',
+                              val1: 233.14,
+                              val2: -1.27,
+                            ),
                           ),
-                          MarketCryptoGridListTile(
-                            name: 'ETH',
-                            val1: 233.14,
-                            val2: -1.27,
+                          CustomGridView(
+                            child1: MarketCryptoGridListTile(
+                              name: 'LTC',
+                              val1: 43.84,
+                              val2: 0.04,
+                            ),
+                            child2: MarketCryptoGridListTile(
+                              name: 'DASH',
+                              val1: 233.14,
+                              val2: -3.27,
+                            ),
                           ),
-                          MarketCryptoGridListTile(
-                            name: 'LTC',
-                            val1: 43.84,
-                            val2: 0.04,
+                          CustomGridView(
+                            child1: MarketCryptoGridListTile(
+                              name: 'LTC',
+                              val1: 43.84,
+                              val2: 0.04,
+                            ),
+                            child2: MarketCryptoGridListTile(
+                              name: 'DASH',
+                              val1: 233.14,
+                              val2: -3.27,
+                            ),
                           ),
-                          MarketCryptoGridListTile(
-                            name: 'DASH',
-                            val1: 233.14,
-                            val2: -3.27,
+                          CustomGridView(
+                            child2: MarketCryptoGridListTile(
+                              name: 'EOS',
+                              val1: 43.84,
+                              val2: 0.04,
+                            ),
+                            child1: MarketCryptoGridListTile(
+                              name: 'MRK',
+                              val1: 233.14,
+                              val2: -1.27,
+                            ),
                           ),
-                          MarketCryptoGridListTile(
-                            name: 'EOS',
-                            val1: 43.84,
-                            val2: 0.04,
+                          CustomGridView(
+                            child2: MarketCryptoGridListTile(
+                              name: 'XRP',
+                              val1: 43.84,
+                              val2: 0.04,
+                            ),
+                            child1: MarketCryptoGridListTile(
+                              name: 'BNB',
+                              val1: 233.14,
+                              val2: -3.27,
+                            ),
                           ),
-                          MarketCryptoGridListTile(
-                            name: 'MRK',
-                            val1: 233.14,
-                            val2: -1.27,
-                          ),
-                          MarketCryptoGridListTile(
-                            name: 'XRP',
-                            val1: 43.84,
-                            val2: 0.04,
-                          ),
-                          MarketCryptoGridListTile(
-                            name: 'BNB',
-                            val1: 233.14,
-                            val2: -3.27,
-                          ),
-                          MarketCryptoGridListTile(
-                            name: 'NEO',
-                            val1: 43.84,
-                            val2: 0.04,
+                          CustomGridView(
+                            child1: MarketCryptoGridListTile(
+                              name: 'NEO',
+                              val1: 43.84,
+                              val2: 0.04,
+                            ),
+                            child2: Text(''),
                           ),
                         ],
                       )
@@ -224,6 +244,26 @@ class _MarketState extends State<Market> {
   }
 }
 
+class CustomGridView extends StatelessWidget {
+  final Widget child1, child2;
+
+  const CustomGridView({Key key, @required this.child1, @required this.child2})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: child1,
+        ),
+        Expanded(
+          child: child2,
+        )
+      ],
+    );
+  }
+}
+
 /// Grid Tile
 class MarketCryptoGridListTile extends StatelessWidget {
   static const _data = [
@@ -253,94 +293,91 @@ class MarketCryptoGridListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isNegative = val2 < 0;
 
-    return Container(
-      height: 200,
-      child: GestureDetector(
-        onTap: () => Navigator.pushNamed(context, HomeDetails.route),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: CustomContainer(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 15,
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, HomeDetails.route),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: CustomContainer(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 15,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    name,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
                     ),
-                    SizedBox(width: 5),
-                    Text(
-                      name,
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(
+                        Icons.star,
+                        color: const Color(0xff3A3C40),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          height: 30,
+                          child: Dash(
+                            length: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: Sparkline(
+                            data: _data,
+                            lineColor: Colors.green,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text.rich(
+                    TextSpan(
+                      text: '$val1\n',
                       style: TextStyle(
+                        fontSize: 15,
                         color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
                         letterSpacing: 0.5,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Icon(
-                          Icons.star,
-                          color: const Color(0xff3A3C40),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          SizedBox(
-                            height: 30,
-                            child: Dash(
-                              length: MediaQuery.of(context).size.width,
-                            ),
+                      children: [
+                        TextSpan(
+                          text: '${isNegative ? '-' : '+'}$val2%',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: isNegative
+                                ? const Color(0xffFF1744)
+                                : const Color(0xff00E676),
                           ),
-                          SizedBox(
-                            height: 30,
-                            child: Sparkline(
-                              data: _data,
-                              lineColor: Colors.green,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text.rich(
-                      TextSpan(
-                        text: '$val1\n',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                          letterSpacing: 0.5,
-                          fontWeight: FontWeight.bold,
                         ),
-                        children: [
-                          TextSpan(
-                            text: '${isNegative ? '-' : '+'}$val2%',
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: isNegative
-                                  ? const Color(0xffFF1744)
-                                  : const Color(0xff00E676),
-                            ),
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.right,
+                      ],
                     ),
-                  ],
-                ),
-              ],
-            ),
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

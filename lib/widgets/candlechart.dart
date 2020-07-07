@@ -87,6 +87,7 @@ class _CandleChartState extends State<CandleChart> {
               height: 350,
               child: KChartWidget(
                 datas,
+                isChinese: false,
                 isLine: false,
                 mainState: _mainState,
                 secondaryState: _secondaryState,
