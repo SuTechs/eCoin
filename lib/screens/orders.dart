@@ -75,11 +75,13 @@ class Orders extends StatelessWidget {
 class ActiveOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ActiveMarketListTile(),
-        ActiveMarketListTile(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ActiveMarketListTile(),
+          ActiveMarketListTile(),
+        ],
+      ),
     );
   }
 }
@@ -87,10 +89,12 @@ class ActiveOrderScreen extends StatelessWidget {
 class PendingOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PendingMarketListTile(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          PendingMarketListTile(),
+        ],
+      ),
     );
   }
 }
