@@ -11,7 +11,7 @@ class CandleChart extends StatefulWidget {
 }
 
 class _CandleChartState extends State<CandleChart> {
-  static const List<String> buttonsText = ['1D', '5D', '1M', '1Y', '5Y', 'MAX'];
+  static const List<String> buttonsText = ['1m', '5m', '15m', '30m', '1h'];
   List<Color> buttonsColors = List(buttonsText.length);
   List<KLineEntity> datas;
   bool showLoading = true;
@@ -35,28 +35,92 @@ class _CandleChartState extends State<CandleChart> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DropdownButton<String>(
-                value: 'Candle Chart',
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: const Color(0xffDADADA),
-                ),
-                style: TextStyle(
-                  color: const Color(0xffDADADA),
-                  letterSpacing: 0.075,
-                  fontSize: 11,
-                ),
-                underline: Container(
-                  height: 0,
-                ),
-                onChanged: (String newValue) {},
-                items: <String>['Candle Chart']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  DropdownButton<String>(
+                    value: 'Candle Chart',
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: const Color(0xffDADADA),
+                    ),
+                    style: TextStyle(
+                      color: const Color(0xffDADADA),
+                      letterSpacing: 0.075,
+                      fontSize: 11,
+                    ),
+                    underline: Container(
+                      height: 0,
+                    ),
+                    onChanged: (String newValue) {},
+                    items: <String>['Candle Chart']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(width: 5),
+                  DropdownButton<String>(
+                    value: 'Timeline',
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: const Color(0xffDADADA),
+                    ),
+                    style: TextStyle(
+                      color: const Color(0xffDADADA),
+                      letterSpacing: 0.075,
+                      fontSize: 11,
+                    ),
+                    underline: Container(
+                      height: 0,
+                    ),
+                    onChanged: (String newValue) {
+                      /// This function can be extracted
+                      for (int i = 0; i < buttonsColors.length; i++)
+                        buttonsColors[i] = Colors.white;
+
+                      switch (newValue) {
+                        case '12h':
+                          getData('1mon');
+                          break;
+                        case '1d':
+                          getData('1min');
+                          break;
+                        case '1M':
+                          getData('1mon');
+                          break;
+                        case '6M':
+                          getData('1year');
+                          break;
+                        case '1Y':
+                          getData('60min');
+                          break;
+                        default:
+                          getData('1year');
+                          break;
+                      }
+
+                      setState(() {});
+                    },
+                    items: <String>[
+                      'Timeline',
+                      '12h',
+                      '1d',
+                      '1w',
+                      '1M',
+                      '6M',
+                      '1Y',
+                      '6Y'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
               ),
               Text.rich(
                 TextSpan(
@@ -146,8 +210,6 @@ class _CandleChartState extends State<CandleChart> {
       case 4:
         getData('60min');
         break;
-      case 5:
-        getData('1week');
         break;
     }
   }
